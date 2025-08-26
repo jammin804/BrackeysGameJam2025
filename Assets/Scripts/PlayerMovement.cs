@@ -10,9 +10,23 @@ public class PlayerMovement : MonoBehaviour
    [SerializeField] private Transform _groundCheck;
    [SerializeField] private Vector2 _groundCheckSize= new Vector2(.5f, .05f);
    [SerializeField] private LayerMask _groundMask;
+   private bool _canJump = true;
+   
+   public static event Action OnJump;
    
    private float _horizontalMovement = 0f;
-   
+
+
+   private void Start()
+   {
+      GameController.PreventJump += CantJump;
+   }
+
+   private void CantJump(bool obj)
+   {
+      _canJump = obj;
+      Debug.Log("CantJump");
+   }
 
    private void Update()
    {
@@ -28,11 +42,12 @@ public class PlayerMovement : MonoBehaviour
 
    public void Jump(InputAction.CallbackContext context)
    {
-      if (IsGrounded())
+      if (IsGrounded() && _canJump)
       {
          if (context.performed)
          {
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _jumpForce);
+            OnJump?.Invoke();
          }
       }
 
