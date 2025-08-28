@@ -36,4 +36,9 @@ public class GameController : MonoBehaviour
         EnableJump?.Invoke(true);
         
     }
+
+    public void CloseBettingScreen(GameObject bettingScreen)
+    {
+        bettingScreen.SetActive(false);
+    }
 }
