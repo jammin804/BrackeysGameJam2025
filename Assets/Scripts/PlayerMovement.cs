@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
    private void Update()
    {
       _rb.linearVelocity = new Vector2(_horizontalMovement * _moveSpeed, _rb.linearVelocity.y);
-      // _rb.AddForce(Vector2.up * _moveSpeed, ForceMode2D.Impulse);
    }
 
    public void Move(InputAction.CallbackContext context)
