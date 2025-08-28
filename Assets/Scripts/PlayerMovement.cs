@@ -20,11 +20,18 @@ public class PlayerMovement : MonoBehaviour
    private void Start()
    {
       GameController.PreventJump += CantJump;
+      GameController.EnableJump += CanJump;
    }
 
-   private void CantJump(bool obj)
+   private void CanJump(bool enable)
    {
-      _canJump = obj;
+      _canJump = enable;
+      Debug.Log("Can Jump");
+   }
+
+   private void CantJump(bool disable)
+   {
+      _canJump = disable;
       Debug.Log("CantJump");
    }
 

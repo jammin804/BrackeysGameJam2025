@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     [SerializeField] TextMeshProUGUI _countDownText;
 
     public static event Action<bool> PreventJump;
+    public static event Action<bool> EnableJump;
     void Start()
     {
         _jumpCounter = 10;
@@ -28,9 +29,11 @@ public class GameController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddJumps(int amount)
     {
+        _jumpCounter = amount;
+        _countDownText.text = _jumpCounter.ToString();
+        EnableJump?.Invoke(true);
         
     }
 }
